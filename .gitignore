@@ -1,0 +1,15 @@
+# npm
+node_modules/
+
+# Output of "npm pack"
+*.tgz
+
+# dotenv environment variablles file
+.environment
+
+# next.js build output
+.next 
+
+# ParcelJS 
+.cache/
+dist/

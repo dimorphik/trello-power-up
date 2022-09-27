@@ -1,0 +1,23 @@
+{
+  "name": "trello-power-up",
+  "version": "1.0.0",
+  "description": "A simple power-up for Trello",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "parcel build src/html/*.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dimorphik/trello-power-up.git"
+  },
+  "author": "Robin Gabrielli",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dimorphik/trello-power-up/issues"
+  },
+  "homepage": "https://github.com/dimorphik/trello-power-up#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
+}
