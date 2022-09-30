@@ -24,6 +24,7 @@ window.TrelloPowerUp.initialize({
       return attachment.url.indexOf("http://www.nps.gov/yell/") === 0;
     });
 
+    console.log(t);
     t.sizeTo();
     console.log("attachment claimed for card", cardId, claimed);
 
@@ -39,8 +40,8 @@ window.TrelloPowerUp.initialize({
         {
           id: "Yellowstone", // optional if you aren't using a function for the title
           claimed: claimed,
-          //          icon: GRAY_ICON, // Must be a gray icon, colored icons not allowed.
-          title: "Example Attachment Section: Yellowstone",
+          icon: GRAY_ICON, // Must be a gray icon, colored icons not allowed.
+          title: "attachment-section example",
           content: {
             type: "iframe",
             url: t.signUrl("./section.html", {
