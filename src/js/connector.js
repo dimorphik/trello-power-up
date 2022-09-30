@@ -7,7 +7,7 @@ window.TrelloPowerUp.initialize({
     return t.card("all").then(function (card) {
       return [
         {
-          text: card.idShort,
+          text: `card-badges example: ${card.idShort}`,
         },
       ];
     });
@@ -25,7 +25,6 @@ window.TrelloPowerUp.initialize({
     });
 
     console.log(t);
-    t.sizeTo();
     console.log("attachment claimed for card", cardId, claimed);
 
     // you can have more than one attachment section on a card
