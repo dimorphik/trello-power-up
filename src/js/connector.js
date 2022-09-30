@@ -24,6 +24,7 @@ window.TrelloPowerUp.initialize({
       return attachment.url.indexOf("http://www.nps.gov/yell/") === 0;
     });
 
+    t.sizeTo();
     console.log("attachment claimed for card", cardId, claimed);
 
     // you can have more than one attachment section on a card
@@ -45,7 +46,7 @@ window.TrelloPowerUp.initialize({
             url: t.signUrl("./section.html", {
               arg: "you can pass your section args here",
             }),
-            height: 230,
+            height: 400,
           },
         },
       ];
