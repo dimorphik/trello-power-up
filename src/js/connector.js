@@ -39,7 +39,7 @@ window.TrelloPowerUp.initialize({
         {
           id: "Yellowstone", // optional if you aren't using a function for the title
           claimed: claimed,
-          icon: GRAY_ICON, // Must be a gray icon, colored icons not allowed.
+          //          icon: GRAY_ICON, // Must be a gray icon, colored icons not allowed.
           title: "Example Attachment Section: Yellowstone",
           content: {
             type: "iframe",
