@@ -12,19 +12,19 @@ window.TrelloPowerUp.initialize({
       ];
     });
   },
-  "attachment-sections": function (t, options) {
+  "attachment-sections": async function (t, options) {
     // options.entries is a list of the attachments for this card
     // you can look through them and 'claim' any that you want to
     // include in your section.
 
-    const cardId = t.card("all").then((card) => card.idShort);
+    const cardId = await t.card("all").then((card) => card.idShort);
 
     // we will just claim urls for Yellowstone
     var claimed = options.entries.filter(function (attachment) {
       return attachment.url.indexOf("http://www.nps.gov/yell/") === 0;
     });
 
-    console.log(`attachment claimed for card ${cardId}? ${claimed}`);
+    console.log("attachment claimed for card", cardId, claimed);
 
     // you can have more than one attachment section on a card
     // you can group items together into one section, have a section
