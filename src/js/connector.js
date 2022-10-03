@@ -7,7 +7,7 @@ window.TrelloPowerUp.initialize({
     return t.card("all").then(function (card) {
       return [
         {
-          text: `card-badges example: hi there! ${card.idShort}`,
+          text: `card-badges example: ${card.idShort}`,
         },
       ];
     });
