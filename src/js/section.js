@@ -19,6 +19,6 @@ t.render(function () {
       document.getElementById("urls").textContent = urls.join(", ");
     })
     .then(function () {
-      return t.sizeTo(500);
+      return t.sizeTo(460);
     });
 });
