@@ -19,5 +19,9 @@
   "homepage": "https://github.com/dimorphik/trello-power-up#readme",
   "devDependencies": {
     "parcel-bundler": "^1.12.5"
+  },
+  "dependencies": {
+    "gapi-script": "^1.2.0",
+    "jwt-decode": "^3.1.2"
   }
 }

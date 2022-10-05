@@ -1,5 +1,16 @@
+import { gapi } from "gapi-script";
+import jwt_decode from "jwt-decode";
+
 var GRAY_ICON =
   "https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-gray.svg";
+var WHITE_ICON =
+  "https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-white.svg";
+var BLACK_ICON =
+  "https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-black.svg";
+
+const onBtnClick = function (t, opts) {
+  console.log("Someone clicked the button");
+};
 
 window.TrelloPowerUp.initialize({
   "card-badges": function (t, opts) {
@@ -11,6 +22,32 @@ window.TrelloPowerUp.initialize({
         },
       ];
     });
+  },
+  "board-buttons": function (t, opts) {
+    return [
+      {
+        // we can either provide a button that has a callback function
+        icon: {
+          dark: WHITE_ICON,
+          light: BLACK_ICON,
+        },
+        text: "Callback",
+        callback: onBtnClick,
+        condition: "edit",
+      },
+      {
+        // or we can also have a button that is just a simple url
+        // clicking it will open a new tab at the provided url
+        icon: {
+          dark: WHITE_ICON,
+          light: BLACK_ICON,
+        },
+        text: "URL",
+        condition: "always",
+        url: "https://trello.com/inspiration",
+        target: "Inspiring Boards", // optional target for above url
+      },
+    ];
   },
   "attachment-sections": async function (t, options) {
     // options.entries is a list of the attachments for this card
@@ -55,3 +92,39 @@ window.TrelloPowerUp.initialize({
     }
   },
 });
+
+/**************
+ * Google Crud
+ **************/
+
+const CLIENT_ID =
+  "724763935854-n4srv5d0t7hahet7hh5ef3hg3sac4r4v.apps.googleusercontent.com";
+const SCOPES = [
+  "https://www.googleapis.com/auth/drive.file",
+  "https://www.googleapis.com/auth/documents",
+  "https://www.googleapis.com/auth/drive",
+  "https://www.googleapis.com/auth/spreadsheets",
+].join(" ");
+
+let user = null;
+let tokenClient = null;
+
+const handleSignout = () => {
+  user = {};
+  document.getElementById("signInDiv").hidden = false;
+};
+
+const handleCallbackResponse = async (response) => {
+  const credential = response.credential;
+
+  user = jwt_decode(credential);
+
+  document.getElementById("signInDiv").hidden = true;
+
+  const client = google.accounts.oauth2.initTokenClient({
+    client_id: CLIENT_ID,
+    scope: SCOPES,
+  });
+
+  tokenClient = client;
+};
