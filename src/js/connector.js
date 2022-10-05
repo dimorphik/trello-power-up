@@ -32,7 +32,7 @@ window.TrelloPowerUp.initialize({
           light: BLACK_ICON,
         },
         text: "Callback",
-        callback: onBtnClick,
+        callback: createFile,
         condition: "edit",
       },
       {
@@ -128,3 +128,97 @@ const handleCallbackResponse = async (response) => {
 
   tokenClient = client;
 };
+
+const createFile = () => {
+  const callbackFn = async (tokenResponse) => {
+    console.log("gapi.client");
+    console.log(gapi.client);
+    if (tokenResponse && tokenResponse.access_token) {
+      //        setAccessToken(tokenResponse.access_token);
+      /*        
+      const docResponse = await gapi.client.docs.documents.create({
+        title: "My Awesome Google Doc",
+      });
+      console.log("docs");
+      console.log(docResponse);
+*/
+      const sheetResponse = await gapi.client.sheets.spreadsheets.create({
+        properties: {
+          title: "My Awesome Google Sheet",
+        },
+      });
+
+      console.log("sheet");
+      console.log(sheetResponse);
+
+      const spreadsheetId = sheetResponse.result.spreadsheetId;
+      console.log(spreadsheetId);
+      const sheetUpdateParams = {
+        spreadsheetId: spreadsheetId,
+        range: "Sheet1!A1:D5",
+        valueInputOption: "USER_ENTERED",
+      };
+
+      const sheetUpdateValueRangeBody = {
+        range: "Sheet1!A1:D5",
+        majorDimension: "ROWS",
+        values: [
+          ["Item", "Cost", "Stocked", "Ship Date"],
+          ["Wheel", "$20.50", "4", "3/1/2016"],
+          ["Door", "$15", "2", "3/15/2016"],
+          ["Engine", "$100", "1", "3/20/2016"],
+          ["Totals", "=SUM(B2:B4)", "=SUM(C2:C4)", "=MAX(D2:D4)"],
+        ],
+      };
+      const sheetUpdateResponse =
+        await gapi.client.sheets.spreadsheets.values.update(
+          sheetUpdateParams,
+          sheetUpdateValueRangeBody
+        );
+
+      console.log(sheetUpdateResponse);
+
+      const sheetGetParams = {
+        spreadsheetId: spreadsheetId,
+        range: "Sheet1!A1:D5",
+      };
+
+      const sheetGetResponse = await gapi.client.sheets.spreadsheets.values.get(
+        sheetGetParams
+      );
+
+      console.log(sheetGetResponse);
+    }
+  };
+
+  tokenClient.callback = callbackFn;
+  tokenClient.requestAccessToken();
+};
+
+const doGoogleLogin = () => {
+  /* global google */
+  google.accounts.id.initialize({
+    client_id: CLIENT_ID,
+    callback: handleCallbackResponse,
+  });
+
+  google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+    theme: "outline",
+    size: "large",
+  });
+
+  const initGapi = async () => {
+    await gapi.client.init({
+      // NOTE: OAuth2 'scope' and 'client_id' parameters have moved to initTokenClient().
+    });
+
+    gapi.client.load("https://docs.googleapis.com/$discovery/rest?version=v1");
+    gapi.client.load(
+      "https://sheets.googleapis.com/$discovery/rest?version=v4"
+    );
+  };
+
+  gapi.load("client", initGapi);
+};
+
+doGoogleLogin();
