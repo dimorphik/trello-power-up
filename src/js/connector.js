@@ -24,7 +24,7 @@ window.TrelloPowerUp.initialize({
     // returns { authorized: false }
     // in this case we would open a popup
     return t.popup({
-      title: "My Auth Popup",
+      title: "Google Apps Authorization",
       url: "./authorize.html",
       height: 140,
     });
@@ -40,18 +40,6 @@ window.TrelloPowerUp.initialize({
         text: "Callback",
         callback: createFile,
         condition: "edit",
-      },
-      {
-        // or we can also have a button that is just a simple url
-        // clicking it will open a new tab at the provided url
-        icon: {
-          dark: WHITE_ICON,
-          light: BLACK_ICON,
-        },
-        text: "URL",
-        condition: "always",
-        url: "https://trello.com/inspiration",
-        target: "Inspiring Boards", // optional target for above url
       },
     ];
   },
