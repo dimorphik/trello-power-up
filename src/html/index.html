@@ -1,7 +1,18 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <script src="https://accounts.google.com/gsi/client" defer></script>
+    <script>
+      function loadHandler() {
+        console.log("google script was loaded");
+        console.log(google);
+      }
+    </script>
+    <script
+      src="https://accounts.google.com/gsi/client"
+      async
+      defer
+      onload="loadHandler()"
+    ></script>
   </head>
   <body>
     <script
