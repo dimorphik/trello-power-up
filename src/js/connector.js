@@ -192,6 +192,7 @@ const createFile = () => {
 const doGoogleLogin = () => {
   console.log("doGoogleLogin");
   console.log(document);
+  console.log(window.google);
 
   /* global google */
   google.accounts.id.initialize({
