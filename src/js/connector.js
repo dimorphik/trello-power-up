@@ -191,35 +191,36 @@ const createFile = () => {
 
 const doGoogleLogin = () => {
   console.log("doGoogleLogin");
-  console.log(document);
   console.log(window.google);
 
   /* global google */
+  console.log("calling google.accounts.id.initialize");
   google.accounts.id.initialize({
     client_id: CLIENT_ID,
     callback: handleCallbackResponse,
   });
-  google.accounts.id.prompt();
 
-  /*
+  console.log("calling google.accounts.id.renderButton");
   google.accounts.id.renderButton(document.getElementById("signInDiv"), {
     theme: "outline",
     size: "large",
   });
 
   const initGapi = async () => {
+    console.log("calling gapi.client.init");
     await gapi.client.init({
       // NOTE: OAuth2 'scope' and 'client_id' parameters have moved to initTokenClient().
     });
 
+    console.log("loading discovery documents");
     gapi.client.load("https://docs.googleapis.com/$discovery/rest?version=v1");
     gapi.client.load(
       "https://sheets.googleapis.com/$discovery/rest?version=v4"
     );
   };
 
+  console.log("calling initGapi");
   gapi.load("client", initGapi);
-  */
 };
 
 doGoogleLogin();
