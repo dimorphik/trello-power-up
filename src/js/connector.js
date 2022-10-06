@@ -202,6 +202,7 @@ const doGoogleLogin = () => {
     allowed_parent_origin: "https://glowing-centaur-cb746f.netlify.app",
   });
 
+  console.log("calling google.accounts.id.prompt");
   google.accounts.id.prompt((notification) => {
     console.log("prompt callback! received notification:", notification);
   });
