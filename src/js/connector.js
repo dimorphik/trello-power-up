@@ -1,5 +1,19 @@
 import { gapi } from "gapi-script";
-import jwt_decode from "jwt-decode";
+
+import auth from "./auth";
+
+const CLIENT_ID =
+  "724763935854-n4srv5d0t7hahet7hh5ef3hg3sac4r4v.apps.googleusercontent.com";
+const SCOPES = [
+  "https://www.googleapis.com/auth/drive.file",
+  "https://www.googleapis.com/auth/documents",
+  "https://www.googleapis.com/auth/drive",
+  "https://www.googleapis.com/auth/spreadsheets",
+].join(" ");
+
+let user = null;
+let tokenClient = null;
+let testVar = "pineapple";
 
 var GRAY_ICON =
   "https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-gray.svg";
@@ -14,6 +28,7 @@ window.TrelloPowerUp.initialize({
     // a property 'authorized' being true/false
     // you can also return the object synchronously if you know
     // the answer synchronously
+    console.log(`auth.test is ${auth.test}`);
     return new TrelloPowerUp.Promise((resolve) =>
       resolve({ authorized: false })
     );
@@ -25,7 +40,7 @@ window.TrelloPowerUp.initialize({
     // in this case we would open a popup
     return t.popup({
       title: "Google Apps Authorization",
-      url: "./authorize.html",
+      url: "./auth.html",
       height: 140,
     });
   },
@@ -48,18 +63,6 @@ window.TrelloPowerUp.initialize({
 /**************
  * Google Crud
  **************/
-
-const CLIENT_ID =
-  "724763935854-n4srv5d0t7hahet7hh5ef3hg3sac4r4v.apps.googleusercontent.com";
-const SCOPES = [
-  "https://www.googleapis.com/auth/drive.file",
-  "https://www.googleapis.com/auth/documents",
-  "https://www.googleapis.com/auth/drive",
-  "https://www.googleapis.com/auth/spreadsheets",
-].join(" ");
-
-let user = null;
-let tokenClient = null;
 
 const handleCallbackResponse = async (response) => {
   console.log("handleCallbackResponse");
