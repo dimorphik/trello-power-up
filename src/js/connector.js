@@ -218,3 +218,5 @@ const doGoogleLogin = () => {
   gapi.load("client", initGapi);
   */
 };
+
+doGoogleLogin();
