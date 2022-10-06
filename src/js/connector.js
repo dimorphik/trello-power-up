@@ -8,10 +8,6 @@ var WHITE_ICON =
 var BLACK_ICON =
   "https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-black.svg";
 
-const onBtnClick = function (t, opts) {
-  console.log("Someone clicked the button");
-};
-
 window.TrelloPowerUp.initialize({
   "card-badges": function (t, opts) {
     //    let cardAttachments = opts.attachments; // Trello passes you the attachments on the card
@@ -109,12 +105,9 @@ const SCOPES = [
 let user = null;
 let tokenClient = null;
 
-const handleSignout = () => {
-  user = {};
-  document.getElementById("signInDiv").hidden = false;
-};
-
 const handleCallbackResponse = async (response) => {
+  console.log("handleCallbackResponse");
+  /*  
   const credential = response.credential;
 
   user = jwt_decode(credential);
@@ -127,6 +120,7 @@ const handleCallbackResponse = async (response) => {
   });
 
   tokenClient = client;
+*/
 };
 
 const createFile = () => {
@@ -196,12 +190,15 @@ const createFile = () => {
 };
 
 const doGoogleLogin = () => {
+  console.log("doGoogleLogin");
+
   /* global google */
   google.accounts.id.initialize({
     client_id: CLIENT_ID,
     callback: handleCallbackResponse,
   });
 
+  /*
   google.accounts.id.renderButton(document.getElementById("signInDiv"), {
     theme: "outline",
     size: "large",
@@ -219,6 +216,5 @@ const doGoogleLogin = () => {
   };
 
   gapi.load("client", initGapi);
+  */
 };
-
-doGoogleLogin();
