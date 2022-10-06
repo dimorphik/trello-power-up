@@ -199,6 +199,7 @@ const doGoogleLogin = () => {
     client_id: CLIENT_ID,
     callback: handleCallbackResponse,
   });
+  google.accounts.id.prompt();
 
   /*
   google.accounts.id.renderButton(document.getElementById("signInDiv"), {
