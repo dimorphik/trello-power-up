@@ -198,14 +198,21 @@ const doGoogleLogin = () => {
   google.accounts.id.initialize({
     client_id: CLIENT_ID,
     callback: handleCallbackResponse,
+    prompt_parent_id: "signInDiv",
+    allowed_parent_origin: "https://glowing-centaur-cb746f.netlify.app",
   });
 
+  google.accounts.id.prompt((notification) => {
+    console.log("prompt callback! received notification:", notification);
+  });
+
+  /*
   console.log("calling google.accounts.id.renderButton");
   google.accounts.id.renderButton(document.getElementById("signInDiv"), {
     theme: "outline",
     size: "large",
   });
-
+*/
   const initGapi = async () => {
     console.log("calling gapi.client.init");
     await gapi.client.init({
@@ -217,6 +224,8 @@ const doGoogleLogin = () => {
     gapi.client.load(
       "https://sheets.googleapis.com/$discovery/rest?version=v4"
     );
+
+    console.log(gapi.client);
   };
 
   console.log("calling initGapi");
