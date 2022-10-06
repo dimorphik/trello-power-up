@@ -11,10 +11,6 @@ const SCOPES = [
   "https://www.googleapis.com/auth/spreadsheets",
 ].join(" ");
 
-let user = null;
-let tokenClient = null;
-let testVar = "pineapple";
-
 var GRAY_ICON =
   "https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-gray.svg";
 var WHITE_ICON =
